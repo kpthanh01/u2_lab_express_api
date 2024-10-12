@@ -5,7 +5,13 @@ const getAllMovies = async (req, res) => {
   res.send(movies)
 }
 
+const getMovieById = async (req, res) => {
+  const { id } = req.params
+  const movie = await Movie.findById(id)
+  res.send(movie)
+}
 
 module.exports = {
-  getAllMovies
+  getAllMovies,
+  getMovieById
 }

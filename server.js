@@ -3,7 +3,9 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3001
 const db = require('./db')
 // Write Require Controllers
-const movies = require('./controllers/movieController.js')
+const movieController = require('./controllers/movieController.js')
+const actorController = require('./controllers/actorController.js')
+const reviewController = require('./controllers/reviewController.js')
 
 const app = express()
 
@@ -14,7 +16,14 @@ app.get('/', (req, res) => {
   res.send('This is the Root!')
 })
 
-app.get('/movies', movies.getAllMovies)
+app.get('/movies', movieController.getAllMovies)
+app.get('/movies/:id', movieController.getMovieById)
+
+app.get('/actors', actorController.getAllActors)
+app.get('/actors/:id', actorController.getActorById)
+
+app.get('/reviews', reviewController.getAllReviews)
+app.get('/reviews/:id', reviewController.getReviewById)
 
 app.listen(PORT, () => {
   console.log(`Express server listening on port ${PORT}`)
